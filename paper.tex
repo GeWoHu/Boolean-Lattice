@@ -5,6 +5,7 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
@@ -54,6 +55,15 @@ is the $(k,k-1)$ inclusion matrix of the Boolean lattice, with the $i$-th
 coordinate scaled by the weight $a_i$. When $a=\mathbf 1=(1,\dots,1)$ this
 is the ordinary up-operator of the Boolean lattice; the weight vector
 \emph{deforms} that operator while leaving the underlying lattice fixed.
+
+\emph{Convention on up and down.} Our $U_k(a)$ maps level $k$ to level
+$k-1$. In the language of differential posets and up-down algebras it is
+accordingly a weighted \emph{down}-operator, and in design theory it is
+the $(k,k-1)$ inclusion matrix. We keep the name up-operator because its
+nonzero pattern records the inclusions $S\subset S\cup\{i\}$ with the
+$k$-set as input, matching the $U$ of the up-down algebra read on the
+dual basis; since $\|U_k(a)\|=\|U_k(a)^{\mathsf T}\|$, no estimate in
+this note depends on the naming.
 
 The main result of this note is the sharp inequality
 \begin{equation}\label{eq:main}
@@ -108,6 +118,12 @@ $T=S\cup\{i\}$ and $0$ otherwise. For $a=\mathbf 1$ its spectral theory is
 classical; in particular $\|U_k(\mathbf 1)\|^2=k(m-k+1)$
 \cite{bannai1984,srinivasan2011}.
 
+\emph{Notation.} Throughout, $\|\cdot\|_2$ and $\|\cdot\|_\infty$
+denote the Euclidean and maximum norms on $\mathbb R^m$, $\|\cdot\|$
+without subscript denotes the operator (spectral) norm, and $|\cdot|$
+applied to a scalar denotes absolute value. In the sign reduction only,
+$|a|:=(|a_1|,\dots,|a_m|)$ denotes the vector of coordinate magnitudes.
+
 \begin{theorem}\label{thm:main}
 For all $m\ge2$, $1\le k\le m$, and $a\in\mathbb{R}^m$,
 \[
@@ -125,6 +141,36 @@ The equal-weight case gives
 $\|U_k(\mathbf 1)\|^2=k(m-k+1)=C(m,k)\cdot m$, so
 \eqref{eq:main} asserts that arbitrary coordinate weights, measured in
 $\ell^2$, can never exceed the rescaled classical constant.
+
+\subsection{Comparison with general-purpose bounds}
+\begin{proposition}\label{prop:generic}
+For all $m\ge2$, $1\le k\le m$, and $a\in\mathbb R^m$,
+\[
+\|U_k(a)\|^2\;\le\;k(m-k+1)\,\|a\|_\infty^2
+\qquad\text{and}\qquad
+\|U_k(a)\|^2\;\le\;\binom{m-1}{k-1}\|a\|_2^2 ,
+\]
+by the Schur test and the Frobenius bound, respectively. The bound of
+Theorem \ref{thm:main} is no larger than either, by factors
+$m\|a\|_\infty^2/\|a\|_2^2\ge1$ and
+$m\binom{m-1}{k-1}/(k(m-k+1))\ge1$; the first factor equals $1$ exactly
+when $a$ is flat, and the second exceeds $1$ for every interior level
+and grows exponentially in $m$ at middle levels.
+\end{proposition}
+\begin{proof}
+Each row of $U_k(a)$ carries exactly the entries $\{a_i:i\notin S\}$ and
+each column exactly $\{a_i:i\in T\}$, so the largest absolute row sum is
+at most $(m-k+1)\|a\|_\infty$ and the largest absolute column sum at
+most $k\|a\|_\infty$; the Schur test
+$s_1(M)\le\sqrt{r_{\max}c_{\max}}$ gives the first display. For the
+second, $\|U_k(a)\|_F^2=\sum_{S}\sum_{i\notin S}a_i^2=
+\binom{m-1}{k-1}\|a\|_2^2$, and $s_1\le\|\cdot\|_F$. Comparing each
+right side with $C(m,k)\|a\|_2^2$, and using
+$\|a\|_2^2\le m\|a\|_\infty^2$ (equality iff all $|a_i|$ are equal),
+yields the stated factors. For the second factor,
+$m\binom{m-1}{k-1}>k(m-k+1)$ holds for $1<k<m$ because
+$\binom{m-1}{k-1}\ge m-1$ and $k<m$.
+\end{proof}
 
 \section{Proof}
 
@@ -200,11 +246,11 @@ is real symmetric with $P,R$ square symmetric, then
 where $s_1$ is the largest singular value.
 \end{lemma}
 \begin{proof}
-For a unit vector $x=(u,v)$, writing $\alpha=|u|$, $\beta=|v|$,
+For a unit vector $x=(u,v)$, writing $\alpha=\|u\|_2$, $\beta=\|v\|_2$,
 \[
 x^{\mathsf T}Mx \le \lambda_{\max}(P)\,\alpha^2+\lambda_{\max}(R)\,\beta^{2}
 +2\,s_1(Q)\,\alpha\beta = y^{\mathsf T}Sy,
-\qquad y=(\alpha,\beta),\ |y|=1,
+\qquad y=(\alpha,\beta),\ \|y\|_2=1,
 \]
 by Cauchy--Schwarz applied to $u^{\mathsf T}Qv$. Maximizing over unit $y$
 gives $\lambda_{\max}(S)$.
@@ -215,7 +261,7 @@ We prove the theorem, simultaneously in $k$, by induction on $m$, carrying
 the equality clause of Theorem \ref{thm:main}(ii). The endpoints are
 exact: $U_1(a)$ is the row vector $(a_1,\dots,a_m)$ and $U_m(a)$ is a
 column vector, so
-$\|U_1(a)\|^2=\|U_m(a)\|^2=|a|^2=C(m,1)|a|^2=C(m,m)|a|^2$.
+$\|U_1(a)\|^2=\|U_m(a)\|^2=\|a\|_2^2=C(m,1)\|a\|_2^2=C(m,m)\|a\|_2^2$.
 
 Let $1<k<m$ and $a\ne0$. If $a'=0$, then \eqref{eq:block} gives
 \[
@@ -227,7 +273,7 @@ the $(k-1)$-sets containing $m$, so $\|U_k(a)\|=a_m$ and
 $\|U_k(a)\|^2=a_m^2<C(m,k)\,a_m^2$ because
 $k(m-k+1)-m=(k-1)(m-k)>0$; the inequality is strict in this case.
 
-Assume then $s:=|a'|^2>0$ and set $t=a_m^2/s$,
+Assume then $s:=\|a'\|_2^2>0$ and set $t=a_m^2/s$,
 $\alpha^2=\|U_k(a')\|^2$, $\beta^2=\|U_{k-1}(a')\|^2$.
 Applying Lemma \ref{lem:block} to \eqref{eq:gram} with
 $P=AA^{\mathsf T}+a_m^2 I$, $R=BB^{\mathsf T}$, $Q=a_m B^{\mathsf T}$,
@@ -277,14 +323,14 @@ positive, so equality holds iff $t=\frac1{m-1}$.
 \end{proof}
 
 Combining \eqref{eq:corner} with Lemma \ref{lem:closure},
-$\|U_k(a)\|^2\le s\,C(1+t)=C(m,k)(s+a_m^2)=C(m,k)|a|^2$, completing the
+$\|U_k(a)\|^2\le s\,C(1+t)=C(m,k)(s+a_m^2)=C(m,k)\|a\|_2^2$, completing the
 induction. Sharpness: $G_k(\mathbf 1)\mathbf 1=k(m-k+1)\mathbf 1$, so
 equality is attained at $a=\mathbf 1$ in every level. \hfill$\square$
 
 \section{Equality cases}
 Throughout this section $1<k<m$ and $a\ne0$. The ``if'' direction: if
 $|a_1|=\cdots=|a_m|=c$, the sign reduction \eqref{eq:sign} gives
-$\|U_k(a)\|=\|U_k(c\mathbf 1)\|=c\sqrt{k(m-k+1)}=C(m,k)^{1/2}|a|$.
+$\|U_k(a)\|=\|U_k(c\mathbf 1)\|=c\sqrt{k(m-k+1)}=C(m,k)^{1/2}\|a\|_2$.
 
 For the only-if direction, suppose equality holds in
 Theorem \ref{thm:main}. The chain of \S3 is a chain of upper bounds
@@ -318,8 +364,8 @@ strictly increasing in $p$ and in $q$ at fixed $o>0$. Equality in the
 second link therefore forces equality in the $p$- and $q$-steps, i.e.\
 $\alpha^2=A_0 s$ and $\beta^2=B_0 s$.
 
-\emph{Lifting.} The identities $\alpha^2=C(m-1,k)|a'|^2$ and
-$\beta^2=C(m-1,k-1)|a'|^2$ are equalities in the induction hypothesis at
+\emph{Lifting.} The identities $\alpha^2=C(m-1,k)\|a'\|_2^2$ and
+$\beta^2=C(m-1,k-1)\|a'\|_2^2$ are equalities in the induction hypothesis at
 $(m-1,k)$ and $(m-1,k-1)$. If $2\le k\le m-2$ the pair $(m-1,k)$ is
 interior and the strengthened induction hypothesis applied through the
 first identity gives $|a_1|=\cdots=|a_{m-1}|$; this includes $k=2$, since
@@ -368,6 +414,46 @@ replaces it with a scalar closure whose defect \eqref{eq:defect} is
 exactly the deviation from the equal-weight ray. We do not claim that the
 deletion induction is the only route to \eqref{eq:main}.
 \end{remark}
+
+\begin{remark}[complex weights]\label{rem:complex}
+Theorem \ref{thm:main} extends verbatim to $a\in\mathbb C^m$, with
+$|a_i|^2$ in place of $a_i^2$ and with equality, for interior $k$ and
+$a\ne0$, exactly when all $|a_i|$ are equal. The conjugation identity
+\eqref{eq:sign} holds for every phase vector $\sigma\in(S^1)^m$, where
+$D_{\sigma,j}$ is diagonal unitary; choosing $\sigma_i=\bar a_i/|a_i|$
+turns $U_k(a)$ into $U_k(|a|)$, and every remaining step of the proof is
+an assertion about $|a|$. The companion script
+\texttt{verification/complex\_weights.py} confirms the bound numerically
+for random complex weights, and the flat phase vectors attain equality
+exactly.
+\end{remark}
+
+\section{Numerical ratios}
+For orientation, Table~1 records the normalized ratio
+$R(a)=\|U_k(a)\|^2/\bigl(C(m,k)\,\|a\|_2^2\bigr)$, computed by exact
+double-precision SVD of the explicit inclusion matrices
+(\texttt{verification/numerical\_table.py}; random rows use 200 standard
+Gaussian draws).
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lrrrrrr}
+\hline
+$(m,k)$ & flat & $e_1$ & 2-sparse & nearly flat & random (mean) & random (max)\\
+\hline
+$(6,3)$ & 1.000000 & 0.5000 & 0.5000 & 0.999973 & 0.7709 & 0.9641\\
+$(7,4)$ & 1.000000 & 0.4375 & 0.4375 & 0.999976 & 0.7433 & 0.9462\\
+\hline
+\end{tabular}
+
+Table~1: $R(a)$ for flat, sparse, nearly flat
+$(1.01,0.99,1,\dots,1)$, and random weights.
+\end{center}
+
+The nearly-flat rows show the gap $1-R(a)$ is quadratic in the
+perturbation size, which is the shape a quantitative stability theorem
+would take; the sparse rows match the exact value
+$m/(k(m-k+1))$ forced by a single-coordinate operator.
 
 \section*{Acknowledgments and disclosure}
 

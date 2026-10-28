@@ -41,6 +41,12 @@ No application or novelty claim beyond the stated theorem is made here.
 - `paper.tex` — authoritative source.
 - `paper.pdf` — PDF compiled from that source with Tectonic 0.15.0 / xdvipdfmx.
 - `verification/verify.py` — symbolic, exact block-identity, and numerical checks.
+- `verification/perfect_square_exact.py` — standalone transparent exact-arithmetic
+  verification (SymPy expansion plus exact `Fraction` spot checks) of the
+  perfect-square closure identity.
+- `verification/numerical_table.py` — regenerates the normalized-ratio table of the
+  paper's numerical-ratios section.
+- `verification/complex_weights.py` — randomized checks of the complex-weight extension.
 - `verification/RESULTS.md` — recorded release verification output and build facts.
 - `AI-DISCLOSURE.md` — factual development and verification disclosure.
 - `HERMES_FINAL_REFEREE_REPORT.md` — independent editorial and mathematical review.
@@ -73,11 +79,22 @@ Requirements are Python 3, NumPy, and SymPy. The script checks:
 3. the sign-conjugation identity and coordinate-deletion block decomposition;
 4. randomized small-dimensional instances, exact flat-weight equality, and strictness for fixed non-flat interior examples.
 
+The auxiliary scripts run the same way:
+
+```sh
+python3 verification/perfect_square_exact.py
+python3 verification/numerical_table.py
+python3 verification/complex_weights.py
+```
+
 These checks support the proof; they do not substitute for independent human peer review.
 
 ## Review status
 
-The release PDF was regenerated directly from the included source. The source, proof identities, final PDF rendering, and the two retained references were checked during preparation. **Independent human mathematical peer review has not occurred.** See `HERMES_FINAL_REFEREE_REPORT.md` and `AI-DISCLOSURE.md` for scope and limitations.
+The release PDF was regenerated directly from the included source. The source, proof identities, final PDF rendering, and the two retained references were checked during preparation. **Independent human mathematical peer review has not occurred.** Revision v1.1 adds a
+convention statement, a notation pass, a comparison proposition against
+general-purpose norm bounds, a complex-weight remark, and a numerical appendix, in
+response to an external referee-style checklist. See `HERMES_FINAL_REFEREE_REPORT.md` and `AI-DISCLOSURE.md` for scope and limitations.
 
 ## License
 
